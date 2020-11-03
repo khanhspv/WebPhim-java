@@ -30,7 +30,6 @@ public class Film {
     private String language;
     private Integer time;
     @NonNull
-    @Field()
     private LocalDateTime release;
     private String content;
     @NonNull
@@ -44,4 +43,5 @@ public class Film {
     private Serie series_movie;
     private List<Esposide> esposide;
     private List<Comment> comment;
+    private String trailer;
 }
