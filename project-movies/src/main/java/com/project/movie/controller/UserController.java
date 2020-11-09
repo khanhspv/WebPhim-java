@@ -1,7 +1,10 @@
 package com.project.movie.controller;
 
 import com.project.movie.document.User;
+import com.project.movie.payload.request.LoginRequest;
 import com.project.movie.payload.response.MessageResponse;
+import com.project.movie.payload.response.ResponseLogin;
+import com.project.movie.service.JwtService.JwtService;
 import com.project.movie.service.user.UserServiceImp;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ public class UserController {
     @Autowired
     private UserServiceImp userServiceImp;
 
+    @Autowired
+    private JwtService jwtService;
     @GetMapping(value = "/users",produces = "application/json")
     public ResponseEntity<List<User>> findAllUser(){
         log.info("findAllUser info");
@@ -67,5 +72,31 @@ public class UserController {
     public void deleteUser(@PathVariable(value = "id") String id){
         log.info("deltUser infor");
         this.userServiceImp.delUser(id);
+    } /*
+   Method login
+   @param User user truyền từ client vào
+   return Response
+   * */
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<ResponseLogin> login(@RequestBody LoginRequest user) {
+
+        ResponseLogin result = new ResponseLogin();
+        HttpStatus httpStatus = null;
+        try {
+            if (userServiceImp.checkLogin(user)) {
+                result.setToken(jwtService.generateTokenLogin(user.getUsername()));
+                List<String> roles = userServiceImp.loadUserByUserName(user.getUsername()).getRoles();
+                result.setRoles(roles);
+                httpStatus = HttpStatus.OK;
+            } else {
+                result.setToken("Wrong userId and password");
+                httpStatus = HttpStatus.BAD_REQUEST;
+            }
+        } catch (Exception ex) {
+            result.setToken("Server Error");
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<ResponseLogin>(result, httpStatus);
     }
+
 }

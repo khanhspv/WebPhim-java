@@ -1,6 +1,8 @@
 package com.project.movie.service.user;
 
 import com.project.movie.document.User;
+import com.project.movie.payload.request.LoginRequest;
+
 import java.util.List;
 
 public interface UserService {
@@ -11,4 +13,7 @@ public interface UserService {
     User findUserById(String id);
     boolean existsUserByUserName(String username);
     boolean existsUserByEmail(String email);
+    User loadUserByUserName(String username);
+    Boolean checkLogin(LoginRequest user);
+
 }

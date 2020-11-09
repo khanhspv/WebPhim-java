@@ -3,6 +3,7 @@ package com.project.movie.service.user;
 import com.project.movie.dao.UserRepository;
 import com.project.movie.document.User;
 import com.project.movie.exception.ResourceNotFoundException;
+import com.project.movie.payload.request.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,15 @@ public class UserServiceImp implements UserService{
     @Override
     public boolean existsUserByEmail(String email) {
         return userRepository.existsUserByEmail(email);
+    }
+
+    @Override
+    public User loadUserByUserName(String username) {
+        return userRepository.findByUserName(username);
+    }
+
+    @Override
+    public Boolean checkLogin(LoginRequest user) {
+        return userRepository.findByUserNameAndPassword(user.getUsername(), user.getPassword()) != null;
     }
 }
