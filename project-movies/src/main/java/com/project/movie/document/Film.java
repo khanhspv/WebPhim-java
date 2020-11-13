@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -15,31 +16,28 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("film")
+@Document("Film")
 public class Film {
-
     @Id
     private String id;
     private String name;
+    private String image;
     private String status;
-    private String director;
-    private String type;
+    private List<String> director;
+    private String genre;
     private String types;
     private String nation;
     private String quality;
     private String language;
     private Integer time;
-    @NonNull
     private LocalDateTime release;
     private String content;
-    @NonNull
     private LocalDateTime createAt;
-    @NonNull
     private LocalDateTime modifyAt;
     private Boolean statusActive;
     private String url;
     private Integer age;
-    private List<Actor> actor;
+    private List<String> actor;
     private Serie series_movie;
     private List<Esposide> esposide;
     private List<Comment> comment;

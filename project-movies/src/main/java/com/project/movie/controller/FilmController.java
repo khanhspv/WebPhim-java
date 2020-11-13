@@ -48,16 +48,17 @@ public class FilmController {
     }
 
     @PutMapping(value = "/film",produces = "application/json")
-    public ResponseEntity<?> updateFilm(@RequestBody @Validated Film film){
+    public ResponseEntity<?> updateFilm(@RequestBody Film film){
         log.info("updateFilm information");
         return this.filmServiceImp.updateFilm(film) ? new ResponseEntity<>(true, HttpStatus.ACCEPTED) :
                 new ResponseEntity<>(false,HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping(value = "/film/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteFilm(@PathVariable(value = "id") String id){
         log.info("deleteFilm infor");
         this.filmServiceImp.delFilm(id);
+
     }
 }

@@ -1,5 +1,6 @@
 package com.project.movie.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Document(collection = "users")
+@Document(collection = "User")
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class User {
     private String id;
     @Indexed(unique = true)
     private String userName;
+    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
@@ -38,6 +40,7 @@ public class User {
     private List<Video> saved_video;
     private Boolean isActive;
 
+    @JsonIgnore
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (String role : roles) {

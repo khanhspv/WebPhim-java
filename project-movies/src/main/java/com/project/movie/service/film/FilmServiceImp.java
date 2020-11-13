@@ -42,7 +42,7 @@ public class FilmServiceImp implements FilmService{
         film1.setStatus(film.getStatus());
         film1.setSeries_movie(film.getSeries_movie());
         film1.setTime(film.getTime());
-        film1.setType(film.getType());
+        film1.setGenre(film.getGenre());
         film1.setTypes(film.getTypes());
         film1.setUrl(film.getUrl());
         film1.setStatusActive(film.getStatusActive());
