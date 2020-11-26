@@ -7,10 +7,11 @@ import com.project.movie.payload.request.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class UserServiceImp implements UserService{
+public class UserServiceImp implements UserService {
 
     @Autowired
     UserRepository userRepository;
@@ -22,12 +23,15 @@ public class UserServiceImp implements UserService{
 
     @Override
     public boolean insertUser(User user) {
-        return  userRepository.save(user) instanceof User? true : false;
+        user.setRoles(Arrays.asList("ROLE_USER"));
+        user.setIsActive(false);
+        System.out.println(user);
+        return userRepository.save(user) instanceof User ? true : false;
     }
 
     @Override
     public boolean updateUser(User user) {
-        User user1 =userRepository.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException());
+        User user1 = userRepository.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException());
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
         user1.setBirthDay(user.getBirthDay());
@@ -45,8 +49,8 @@ public class UserServiceImp implements UserService{
 
     @Override
     public void delUser(String user) {
-         User user1 =userRepository.findById(user).orElseThrow(ResourceNotFoundException::new);
-         userRepository.deleteById(user1.getId());
+        User user1 = userRepository.findById(user).orElseThrow(ResourceNotFoundException::new);
+        userRepository.deleteById(user1.getId());
     }
 
     @Override
@@ -72,5 +76,21 @@ public class UserServiceImp implements UserService{
     @Override
     public Boolean checkLogin(LoginRequest user) {
         return userRepository.findByUserNameAndPassword(user.getUsername(), user.getPassword()) != null;
+    }
+
+    @Override
+    public boolean addFilm(String id, String idFilm) {
+        User user1 = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
+        if(user1.getSaved_video() == null){
+            user1.setSaved_video(Arrays.asList(idFilm));
+        }
+        else{
+            if(user1.getSaved_video().contains(idFilm)){
+                user1.setSaved_video(user1.getSaved_video());
+            }else{
+                user1.getSaved_video().add(idFilm);
+            }
+        }
+        return userRepository.save(user1) instanceof User;
     }
 }

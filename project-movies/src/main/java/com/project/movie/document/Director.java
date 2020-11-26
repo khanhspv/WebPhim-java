@@ -1,5 +1,6 @@
 package com.project.movie.document;
 
+import com.mongodb.lang.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,10 @@ import java.time.LocalDateTime;
 public class Director {
     @Id
     private String _id;
+    private String name;
     private String image;
+    @Nullable
     private LocalDateTime createAt;
+    @Nullable
     private LocalDateTime modifyAt;
 }

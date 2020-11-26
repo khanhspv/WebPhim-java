@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -25,7 +26,6 @@ public class User {
     private String id;
     @Indexed(unique = true)
     private String userName;
-    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
@@ -37,8 +37,11 @@ public class User {
     private String phone;
     private Member member;
     private List<String> roles;
-    private List<Video> saved_video;
+    private List<String> saved_video;
     private Boolean isActive;
+    private Integer age;
+
+
 
     @JsonIgnore
     public List<GrantedAuthority> getAuthorities() {

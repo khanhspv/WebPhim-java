@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GenreServiceImp implements GenreService{
+public class GenreServiceImp implements GenreService {
 
 
     final GenreRepository genreRepository;
@@ -35,11 +35,11 @@ public class GenreServiceImp implements GenreService{
 
     @Override
     public boolean updateGenre(Genre user) {
-        Genre genre =  findById(user.get_id());
+        Genre genre = findById(user.get_id());
         genre.set_id(user.get_id());
         genre.setName(user.getName());
         genre.setModifyAt(user.getModifyAt());
-        return genreRepository.save(genre) instanceof  Genre;
+        return genreRepository.save(genre) instanceof Genre;
     }
 
     @Override

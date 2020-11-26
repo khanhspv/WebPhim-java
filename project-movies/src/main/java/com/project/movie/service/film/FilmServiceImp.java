@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FilmServiceImp implements FilmService{
+public class FilmServiceImp implements FilmService {
 
     @Autowired
     private FilmRepository filmRepository;
@@ -47,7 +47,7 @@ public class FilmServiceImp implements FilmService{
         film1.setUrl(film.getUrl());
         film1.setStatusActive(film.getStatusActive());
         film1.setComment(film.getComment());
-        return filmRepository.save(film1) instanceof  Film ;
+        return filmRepository.save(film1) instanceof Film;
     }
 
     @Override

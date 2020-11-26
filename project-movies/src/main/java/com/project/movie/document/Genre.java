@@ -1,5 +1,6 @@
 package com.project.movie.document;
 
+import com.mongodb.lang.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ public class Genre {
     @Id
     private String _id;
     private String name;
+    @Nullable
     private LocalDateTime createAt;
+    @Nullable
     private LocalDateTime modifyAt;
 }

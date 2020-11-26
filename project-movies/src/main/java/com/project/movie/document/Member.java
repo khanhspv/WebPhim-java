@@ -14,5 +14,5 @@ public class Member {
     private int time;
     private LocalDateTime startActive;
     private LocalDateTime endActive;
-
+    private String content;
 }

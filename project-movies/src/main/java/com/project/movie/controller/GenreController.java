@@ -19,36 +19,36 @@ public class GenreController {
     private GenreService genreService;
 
     @GetMapping(value = "/genres")
-    public ResponseEntity<?> findAllGenre(){
+    public ResponseEntity<?> findAllGenre() {
         List<Genre> genreList = genreService.findAll();
-        return  genreList != null ? new ResponseEntity<>(genreList, HttpStatus.OK):
-                new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        return genreList != null ? new ResponseEntity<>(genreList, HttpStatus.OK) :
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/genre/{id}",produces = "application/json")
-    public ResponseEntity<Genre> findGenreById(@PathVariable(value = "id",required = true)String id){
+    @GetMapping(value = "/genre/{id}", produces = "application/json")
+    public ResponseEntity<Genre> findGenreById(@PathVariable(value = "id", required = true) String id) {
         log.info("findGenreById info");
         Genre genre = genreService.findById(id);
-        return  new ResponseEntity<>(genre, HttpStatus.OK);
+        return new ResponseEntity<>(genre, HttpStatus.OK);
     }
 
 
-    @PostMapping(value = "/genre",produces = "application/json")
-    public ResponseEntity<?> insertGenre(@RequestBody(required = true) @Validated Genre genre){
+    @PostMapping(value = "/genre", produces = "application/json")
+    public ResponseEntity<?> insertGenre(@RequestBody(required = true) @Validated Genre genre) {
         return this.genreService.insertGenre(genre) ? new ResponseEntity<>(true, HttpStatus.CREATED) :
-                new ResponseEntity<>(false,HttpStatus.NOT_MODIFIED);
+                new ResponseEntity<>(false, HttpStatus.NOT_MODIFIED);
     }
 
-    @PutMapping(value = "/genre",produces = "application/json")
-    public ResponseEntity<?> updateGenre(@RequestBody @Validated Genre genre){
+    @PutMapping(value = "/genre", produces = "application/json")
+    public ResponseEntity<?> updateGenre(@RequestBody @Validated Genre genre) {
         log.info("updateGenre information");
         return this.genreService.updateGenre(genre) ? new ResponseEntity<>(true, HttpStatus.OK) :
-                new ResponseEntity<>(false,HttpStatus.NOT_MODIFIED);
+                new ResponseEntity<>(false, HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping(value = "/genre/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteGenre(@PathVariable(value = "id") String id){
+    public void deleteGenre(@PathVariable(value = "id") String id) {
         log.info("deleteGenre infor");
         this.genreService.delGenre(id);
     }
