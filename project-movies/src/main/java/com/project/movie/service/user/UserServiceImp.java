@@ -24,6 +24,8 @@ public class UserServiceImp implements UserService {
     @Override
     public boolean insertUser(User user) {
         user.setRoles(Arrays.asList("ROLE_USER"));
+        user.setMember(user.getMember());
+        user.setDisplayName(user.getDisplayName());
         user.setIsActive(false);
         System.out.println(user);
         return userRepository.save(user) instanceof User ? true : false;
@@ -34,6 +36,7 @@ public class UserServiceImp implements UserService {
         User user1 = userRepository.findById(user.getId()).orElseThrow(() -> new ResourceNotFoundException());
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
+        user1.setDisplayName(user.getDisplayName());
         user1.setBirthDay(user.getBirthDay());
         user1.setCreate_At(user.getCreate_At());
         user1.setModify_At(user.getModify_At());

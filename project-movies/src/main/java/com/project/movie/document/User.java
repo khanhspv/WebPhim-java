@@ -27,6 +27,7 @@ public class User {
     @Indexed(unique = true)
     private String userName;
     private String password;
+    private String DisplayName;
     private String firstName;
     private String lastName;
     private LocalDateTime birthDay;
