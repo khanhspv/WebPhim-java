@@ -38,6 +38,7 @@ public class GenreServiceImp implements GenreService {
         Genre genre = findById(user.get_id());
         genre.set_id(user.get_id());
         genre.setName(user.getName());
+        genre.setMessage(user.getMessage());
         genre.setModifyAt(user.getModifyAt());
         return genreRepository.save(genre) instanceof Genre;
     }

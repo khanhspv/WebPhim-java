@@ -7,6 +7,9 @@ import com.project.movie.payload.request.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,8 +27,13 @@ public class UserServiceImp implements UserService {
     @Override
     public boolean insertUser(User user) {
         user.setRoles(Arrays.asList("ROLE_USER"));
-        user.setMember(user.getMember());
         user.setDisplayName(user.getDisplayName());
+        user.setMember(user.getMember());
+        user.setPremium(user.getPremium());
+        user.setPrice(user.getPrice());
+        user.setDisplayName(user.getDisplayName());
+        user.setStartActive(LocalDateTime.now());
+        user.setEndActive(LocalDateTime.now());
         user.setIsActive(false);
         System.out.println(user);
         return userRepository.save(user) instanceof User ? true : false;

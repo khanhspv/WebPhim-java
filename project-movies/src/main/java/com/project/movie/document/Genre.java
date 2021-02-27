@@ -17,6 +17,7 @@ public class Genre {
     @Id
     private String _id;
     private String name;
+    private String message;
     @Nullable
     private LocalDateTime createAt;
     @Nullable

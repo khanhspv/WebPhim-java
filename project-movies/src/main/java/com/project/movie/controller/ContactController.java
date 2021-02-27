@@ -38,7 +38,7 @@ public class ContactController {
     @DeleteMapping(value = "/contact/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteGenre(@PathVariable(value = "id") String id) {
-        log.info("deleteGenre infor");
+        log.info("deleteContact infor");
         this.contactServiceImp.delContact(id);
     }
 

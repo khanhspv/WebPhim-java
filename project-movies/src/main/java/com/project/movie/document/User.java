@@ -41,6 +41,10 @@ public class User {
     private List<String> saved_video;
     private Boolean isActive;
     private Integer age;
+    private LocalDateTime startActive;
+    private LocalDateTime endActive;
+    private String premium;
+    private String price;
 
 
 
